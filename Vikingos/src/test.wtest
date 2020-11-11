@@ -1,0 +1,16 @@
+import example.*
+
+	
+	
+describe "hola xd" {
+	
+	const dani = new Soldado(claseSocial=karl,vidasCobradas= 1,armas =[])
+	const expDani = new Expedicion()
+
+	test "testX" {
+	
+	assert.throwsException({expDani.subir(dani)})
+
+	}
+
+}
