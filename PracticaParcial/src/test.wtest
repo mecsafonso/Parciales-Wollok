@@ -1,0 +1,30 @@
+import objects.*
+
+test "uno que verifique que se haya producido efecto correctamente" {
+	
+	const maxi = new Autor(tipoUsuario = administrador , nombre = "maxi")
+	const maxi2 = new Autor(tipoUsuario = bot , nombre = "maxi")
+	maxi.cambiarRolUsuarios([maxi2],administrador)
+	assert.that(maxi2.puedeCambiarRoles())
+
+}
+
+test "uno que verifique que no se pueda hacer algo" {
+	
+	const maxi = new Autor(tipoUsuario = bot , nombre = "maxi")
+	
+	assert.throwsException({maxi.cambiarRolUsuarios([maxi],administrador)})
+}
+
+test "y uno que verifique que se devuelva bien algo" {
+	
+	const maxi = new Autor(tipoUsuario = administrador , nombre = "maxi")
+	const branchi = new Branch(listaColaboradores = [maxi] , conjuntoCommits = [])
+	const archivi = new Archivo(nombre = "archivi")
+	const carpeti = new Carpeta(nombre = "carpeti", listaArchivos = [archivi])
+	const commiti = new Commit(cambios = [new Agregar(archivoObjetivo = archivi , textoAAgregar = "xd" )],carpetaAModificar = carpeti)
+	
+	maxi.commitearEn(commiti,branchi)
+	
+	assert.equals(branchi.blame(archivi),[maxi])
+}
